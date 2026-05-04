@@ -1,0 +1,9 @@
+{
+    "dotnet.defaultSolution": "game.slnx",
+    "files.exclude": {
+        "**/Library": true,
+        "**/Temp": true,
+        "**/Obj": true,
+        "**/Logs": true
+    }
+}
