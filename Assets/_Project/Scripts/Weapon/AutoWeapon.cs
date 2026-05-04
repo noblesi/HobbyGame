@@ -19,6 +19,10 @@ namespace TopDownRoguelite.Weapon
         [Min(0.1f)]
         [SerializeField] private float projectileSpeed = 8f;
 
+        public float Damage => damage;
+        public float FireInterval => fireInterval;
+        public float TargetRange => targetRange;
+
         private float fireTimer;
         private bool hasLoggedMissingProjectileWarning;
 
@@ -96,6 +100,21 @@ namespace TopDownRoguelite.Weapon
 
             Debug.LogWarning("AutoWeapon projectile prefab is not assigned.", this);
             hasLoggedMissingProjectileWarning = true;
+        }
+
+        public void AddDamage(float amount)
+        {
+            damage = Mathf.Max(0f, damage + amount);
+        }
+
+        public void MultiplyFireInterval(float multiplier)
+        {
+            fireInterval = Mathf.Max(0.1f, fireInterval * multiplier);
+        }
+
+        public void AddTargetRange(float amount)
+        {
+            targetRange = Mathf.Max(0.1f, targetRange + amount);
         }
     }
 }

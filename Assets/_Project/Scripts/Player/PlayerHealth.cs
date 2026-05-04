@@ -43,6 +43,21 @@ namespace TopDownRoguelite.Player
             CurrentHealth = Mathf.Min(maxHealth, CurrentHealth + amount);
         }
 
+        public void IncreaseMaxHealth(float amount, bool healByIncrease = true)
+        {
+            if (amount <= 0f)
+            {
+                return;
+            }
+
+            maxHealth += amount;
+
+            if (healByIncrease && !IsDead)
+            {
+                CurrentHealth = Mathf.Min(maxHealth, CurrentHealth + amount);
+            }
+        }
+
         private void Die()
         {
             IsDead = true;

@@ -4,6 +4,7 @@ using UnityEngine;
 namespace TopDownRoguelite.Weapon
 {
     [RequireComponent(typeof(Collider2D))]
+    [RequireComponent(typeof(Rigidbody2D))]
     public class Projectile : MonoBehaviour
     {
         [Header("Projectile")]
@@ -13,12 +14,18 @@ namespace TopDownRoguelite.Weapon
         [SerializeField] private float lifetime = 3f;
 
         private Vector2 direction = Vector2.up;
+        private Rigidbody2D rb;
         private float speed;
         private float damage;
         private float lifeTimer;
 
         private void Awake()
         {
+            rb = GetComponent<Rigidbody2D>();
+            rb.bodyType = RigidbodyType2D.Kinematic;
+            rb.gravityScale = 0f;
+            rb.freezeRotation = true;
+
             speed = defaultSpeed;
             damage = defaultDamage;
 
@@ -28,13 +35,16 @@ namespace TopDownRoguelite.Weapon
 
         private void Update()
         {
-            transform.position += (Vector3)(direction * speed * Time.deltaTime);
-
             lifeTimer += Time.deltaTime;
             if (lifeTimer >= lifetime)
             {
                 Destroy(gameObject);
             }
+        }
+
+        private void FixedUpdate()
+        {
+            rb.MovePosition(rb.position + direction * speed * Time.fixedDeltaTime);
         }
 
         private void OnTriggerEnter2D(Collider2D other)

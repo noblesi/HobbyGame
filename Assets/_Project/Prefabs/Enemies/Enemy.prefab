@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 4559887265213485429}
   - component: {fileID: 6335577251649104286}
   - component: {fileID: 5529048837294061182}
+  - component: {fileID: 7449309256816043153}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
@@ -202,3 +203,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::TopDownRoguelite.Enemy.EnemyHealth
   maxHealth: 20
   destroyOnDeath: 1
+--- !u!114 &7449309256816043153
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4300419604662676294}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92a022c807ed422888240b40798f2a85, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: Assembly-CSharp::TopDownRoguelite.Enemy.EnemyExperienceDrop
+  experienceGemPrefab: {fileID: 8282654093927307449, guid: 55586217409c43ecb733d5d4dc195aaa, type: 3}
+  experienceValue: 1
+  randomDropRadius: 0.2

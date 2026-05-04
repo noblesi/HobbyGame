@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace TopDownRoguelite.Enemy
@@ -12,6 +13,8 @@ namespace TopDownRoguelite.Enemy
         public float CurrentHealth { get; private set; }
         public float MaxHealth => maxHealth;
         public bool IsDead { get; private set; }
+
+        public event Action<EnemyHealth> Died;
 
         private void Awake()
         {
@@ -36,6 +39,7 @@ namespace TopDownRoguelite.Enemy
         private void Die()
         {
             IsDead = true;
+            Died?.Invoke(this);
 
             if (destroyOnDeath)
             {

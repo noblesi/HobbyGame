@@ -9,6 +9,8 @@ namespace TopDownRoguelite.Player
         [Header("Movement")]
         [SerializeField] private float moveSpeed = 5f;
 
+        public float MoveSpeed => moveSpeed;
+
         private Rigidbody2D rb;
         private Vector2 moveInput;
 
@@ -60,6 +62,11 @@ namespace TopDownRoguelite.Player
             }
 
             return input.sqrMagnitude > 1f ? input.normalized : input;
+        }
+
+        public void AddMoveSpeed(float amount)
+        {
+            moveSpeed = Mathf.Max(0f, moveSpeed + amount);
         }
     }
 }
