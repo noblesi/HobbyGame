@@ -3,6 +3,7 @@ using UnityEngine;
 
 namespace TopDownRoguelite.Enemy
 {
+    [RequireComponent(typeof(Collider2D))]
     public class EnemyContactDamage : MonoBehaviour
     {
         [Header("Damage")]
@@ -10,8 +11,23 @@ namespace TopDownRoguelite.Enemy
         [SerializeField] private float damage = 10f;
         [Min(0.1f)]
         [SerializeField] private float damageInterval = 1f;
+        [SerializeField] private bool useTriggerCollider = true;
 
         private float nextDamageTime;
+
+        private void Awake()
+        {
+            if (!useTriggerCollider)
+            {
+                return;
+            }
+
+            Collider2D[] colliders = GetComponents<Collider2D>();
+            for (int i = 0; i < colliders.Length; i++)
+            {
+                colliders[i].isTrigger = true;
+            }
+        }
 
         private void OnCollisionStay2D(Collision2D collision)
         {
