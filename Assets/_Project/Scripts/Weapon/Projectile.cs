@@ -1,4 +1,5 @@
 using TopDownRoguelite.Enemy;
+using TopDownRoguelite.Core;
 using UnityEngine;
 
 namespace TopDownRoguelite.Weapon
@@ -56,6 +57,7 @@ namespace TopDownRoguelite.Weapon
             }
 
             enemyHealth.TakeDamage(damage);
+            GameAudioPlayer.PlayHit();
             Destroy(gameObject);
         }
 

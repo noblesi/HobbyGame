@@ -1,4 +1,5 @@
 using System;
+using TopDownRoguelite.Core;
 using UnityEngine;
 
 namespace TopDownRoguelite.Enemy
@@ -40,6 +41,7 @@ namespace TopDownRoguelite.Enemy
         {
             IsDead = true;
             Died?.Invoke(this);
+            GameAudioPlayer.PlayEnemyDeath();
 
             if (destroyOnDeath)
             {

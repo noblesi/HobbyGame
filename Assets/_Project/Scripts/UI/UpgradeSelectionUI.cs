@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using TopDownRoguelite.Core;
 using TopDownRoguelite.Player;
 using TopDownRoguelite.Weapon;
 using UnityEngine;
@@ -130,6 +131,7 @@ namespace TopDownRoguelite.UI
         private void SelectOption(UpgradeOption option)
         {
             option.Apply?.Invoke();
+            GameAudioPlayer.PlayUpgradeSelect();
             pendingLevelUps = Mathf.Max(0, pendingLevelUps - 1);
 
             if (pendingLevelUps > 0)

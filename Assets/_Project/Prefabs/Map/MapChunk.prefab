@@ -82,8 +82,8 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: -100
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
-  m_Color: {r: 0.22, g: 0.28, b: 0.22, a: 1}
+  m_Sprite: {fileID: 21300000, guid: 1c9ed9d1200c29d4cbfd2071028c1cd5, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -107,3 +107,10 @@ MonoBehaviour:
   floorRenderer: {fileID: 7816136586254479731}
   resizeFloorRenderer: 1
   size: {x: 20, y: 20}
+  decorationPrefabs:
+  - {fileID: 3067587326924003671, guid: a0a66c9b152e801409fc26c4ca493d18, type: 3}
+  - {fileID: 5830985496270386004, guid: 019ab1af1d7a4b742a982c009534c058, type: 3}
+  - {fileID: 8193410510875309158, guid: c6d86ec8825b7674a9736d1cb0cd98a2, type: 3}
+  - {fileID: 2055102311959635369, guid: a0a71fda412ad0941ab44f1732ea4c1e, type: 3}
+  decorationCount: 8
+  decorationPadding: {x: 1, y: 1}

@@ -1,3 +1,4 @@
+using TopDownRoguelite.Core;
 using TopDownRoguelite.Player;
 using UnityEngine;
 
@@ -25,6 +26,7 @@ namespace TopDownRoguelite.Item
             }
 
             playerExperience.AddExperience(experienceValue);
+            GameAudioPlayer.PlayExperiencePickup();
             Destroy(gameObject);
         }
 

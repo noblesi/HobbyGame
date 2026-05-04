@@ -1,4 +1,5 @@
 using TopDownRoguelite.Enemy;
+using TopDownRoguelite.Core;
 using UnityEngine;
 
 namespace TopDownRoguelite.Weapon
@@ -62,6 +63,7 @@ namespace TopDownRoguelite.Weapon
 
             Projectile projectile = Instantiate(projectilePrefab, spawnPosition, Quaternion.identity);
             projectile.Initialize(direction, damage, projectileSpeed);
+            GameAudioPlayer.PlayAttack();
         }
 
         private EnemyHealth FindNearestEnemy()

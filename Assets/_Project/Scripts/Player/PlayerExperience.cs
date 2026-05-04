@@ -1,4 +1,5 @@
 using System;
+using TopDownRoguelite.Core;
 using UnityEngine;
 
 namespace TopDownRoguelite.Player
@@ -38,6 +39,7 @@ namespace TopDownRoguelite.Player
                 CurrentExperience -= ExperienceToNextLevel;
                 Level++;
                 ExperienceToNextLevel = CalculateExperienceToNextLevel();
+                GameAudioPlayer.PlayLevelUp();
                 LeveledUp?.Invoke(Level);
             }
 
