@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -14,18 +15,29 @@ namespace TopDownRoguelite.Enemy
         [SerializeField] private float spawnDistance = 8f;
         [Min(1)]
         [SerializeField] private int maxAliveEnemies = 30;
+        [SerializeField] private bool spawnOnStart = true;
 
         private readonly List<GameObject> spawnedEnemies = new List<GameObject>();
         private float spawnTimer;
         private bool hasLoggedMissingPrefabWarning;
 
+        public bool IsSpawning { get; private set; }
+
+        public event Action<EnemyHealth> EnemySpawned;
+
         private void Start()
         {
+            IsSpawning = spawnOnStart;
             TryAssignPlayerTarget();
         }
 
         private void Update()
         {
+            if (!IsSpawning)
+            {
+                return;
+            }
+
             if (enemyPrefab == null)
             {
                 LogMissingPrefabWarning();
@@ -52,7 +64,7 @@ namespace TopDownRoguelite.Enemy
         private void SpawnEnemy()
         {
             Vector2 spawnCenter = target != null ? target.position : transform.position;
-            Vector2 spawnDirection = Random.insideUnitCircle.normalized;
+            Vector2 spawnDirection = UnityEngine.Random.insideUnitCircle.normalized;
 
             if (spawnDirection == Vector2.zero)
             {
@@ -66,6 +78,21 @@ namespace TopDownRoguelite.Enemy
             if (enemy.TryGetComponent(out EnemyMovement enemyMovement) && target != null)
             {
                 enemyMovement.SetTarget(target);
+            }
+
+            if (enemy.TryGetComponent(out EnemyHealth enemyHealth))
+            {
+                EnemySpawned?.Invoke(enemyHealth);
+            }
+        }
+
+        public void SetSpawning(bool isSpawning)
+        {
+            IsSpawning = isSpawning;
+
+            if (isSpawning)
+            {
+                spawnTimer = 0f;
             }
         }
 
