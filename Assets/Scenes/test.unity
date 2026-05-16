@@ -132,6 +132,7 @@ GameObject:
   - component: {fileID: 1032704960}
   - component: {fileID: 1032704959}
   - component: {fileID: 1032704958}
+  - component: {fileID: 1032704963}
   m_Layer: 0
   m_Name: ChapterMap
   m_TagString: Untagged
@@ -204,6 +205,26 @@ MonoBehaviour:
   minMiddleStageOptions: 2
   maxMiddleStageOptions: 3
   logGeneratedMap: 1
+--- !u!114 &1032704963
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1032704957}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f68202ac6854bdf9f7d8b9930f4482d, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: Assembly-CSharp::TopDownRoguelite.Dungeon.StageChoiceController
+  chapterMapController: {fileID: 1032704960}
+  stageRoomController: {fileID: 1032704959}
+  panel: {fileID: 0}
+  titleText: {fileID: 0}
+  optionButtons: []
+  optionTexts: []
+  allowNumberKeySelection: 1
+  logAvailableChoices: 1
 --- !u!4 &1032704962
 Transform:
   m_ObjectHideFlags: 0
