@@ -135,6 +135,7 @@ GameObject:
   - component: {fileID: 1032704963}
   - component: {fileID: 1032704964}
   - component: {fileID: 1032704965}
+  - component: {fileID: 1032704966}
   m_Layer: 0
   m_Name: ChapterMap
   m_TagString: Untagged
@@ -262,6 +263,21 @@ MonoBehaviour:
   optionTexts: []
   allowNumberKeySelection: 1
   logAvailableRewards: 1
+--- !u!114 &1032704966
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1032704957}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0acb3ff98c9c49319547dd7a1d257918, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: Assembly-CSharp::TopDownRoguelite.Inventory.ArtifactGridInventory
+  width: 6
+  height: 4
+  logChanges: 1
 --- !u!4 &1032704962
 Transform:
   m_ObjectHideFlags: 0
