@@ -1,5 +1,7 @@
 using System.Collections.Generic;
+using TopDownRoguelite.Artifact;
 using TopDownRoguelite.Dungeon;
+using TopDownRoguelite.Inventory;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
@@ -11,6 +13,7 @@ namespace TopDownRoguelite.Reward
         [Header("References")]
         [SerializeField] private StageRoomController stageRoomController;
         [SerializeField] private RunRewardInventory rewardInventory;
+        [SerializeField] private ArtifactGridInventory artifactGridInventory;
 
         [Header("Reward Options")]
         [Min(1)]
@@ -19,6 +22,7 @@ namespace TopDownRoguelite.Reward
         [SerializeField] private int minGold = 25;
         [Min(1)]
         [SerializeField] private int maxGold = 60;
+        [SerializeField] private bool autoPlaceArtifactRewards = true;
 
         [Header("Optional UI")]
         [SerializeField] private GameObject panel;
@@ -134,12 +138,43 @@ namespace TopDownRoguelite.Reward
 
         private void ApplyReward(RewardOption rewardOption)
         {
+            ArtifactInstance createdArtifact = null;
+
             if (rewardInventory != null)
             {
-                rewardInventory.AddReward(rewardOption);
+                createdArtifact = rewardInventory.AddReward(rewardOption);
             }
 
+            TryAutoPlaceArtifactReward(rewardOption, createdArtifact);
             Debug.Log($"Selected reward: {rewardOption.Title} ({rewardOption.Description})", this);
+        }
+
+        private void TryAutoPlaceArtifactReward(RewardOption rewardOption, ArtifactInstance artifact)
+        {
+            if (!autoPlaceArtifactRewards || rewardOption == null || rewardOption.RewardType != RewardType.Artifact)
+            {
+                return;
+            }
+
+            if (artifact == null)
+            {
+                Debug.LogWarning("Artifact reward was selected, but no artifact instance was created.", this);
+                return;
+            }
+
+            if (artifactGridInventory == null)
+            {
+                Debug.LogWarning("Artifact reward was created, but ArtifactGridInventory is not assigned.", this);
+                return;
+            }
+
+            if (artifactGridInventory.TryPlaceAtFirstAvailableCell(artifact))
+            {
+                Debug.Log($"Auto-placed artifact reward: {artifact.DisplayName}", this);
+                return;
+            }
+
+            Debug.LogWarning($"Artifact reward could not fit in the grid inventory: {artifact.DisplayName}", this);
         }
 
         private void BuildRewardOptions(StageNode stageNode)
@@ -359,6 +394,11 @@ namespace TopDownRoguelite.Reward
             if (rewardInventory == null)
             {
                 rewardInventory = GetComponent<RunRewardInventory>();
+            }
+
+            if (artifactGridInventory == null)
+            {
+                artifactGridInventory = GetComponent<ArtifactGridInventory>();
             }
         }
     }

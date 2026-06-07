@@ -122,6 +122,22 @@ namespace TopDownRoguelite.Inventory
             return artifact != null && TryRemove(artifact);
         }
 
+        public bool TryPlaceAtFirstAvailableCell(ArtifactInstance artifact)
+        {
+            for (int y = 0; y < Height; y++)
+            {
+                for (int x = 0; x < Width; x++)
+                {
+                    if (TryPlace(artifact, new Vector2Int(x, y)))
+                    {
+                        return true;
+                    }
+                }
+            }
+
+            return false;
+        }
+
         public ArtifactInstance GetArtifactAt(Vector2Int cell)
         {
             EnsureGrid();
@@ -170,22 +186,6 @@ namespace TopDownRoguelite.Inventory
             }
 
             TryRemove(placedArtifacts[0]);
-        }
-
-        private bool TryPlaceAtFirstAvailableCell(ArtifactInstance artifact)
-        {
-            for (int y = 0; y < Height; y++)
-            {
-                for (int x = 0; x < Width; x++)
-                {
-                    if (TryPlace(artifact, new Vector2Int(x, y)))
-                    {
-                        return true;
-                    }
-                }
-            }
-
-            return false;
         }
 
         private ArtifactInstance CreateDebugArtifact()
